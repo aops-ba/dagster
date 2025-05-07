@@ -9,6 +9,8 @@ setup(
         "boto3",
         "pandas",
         "matplotlib",
+        "dagster-aws",
+        "dagster-postgres",
     ],
     extras_require={"dev": ["dagster-webserver", "pytest"]},
 )

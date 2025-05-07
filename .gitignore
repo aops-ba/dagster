@@ -3,3 +3,4 @@ quickstart_etl.egg-info
 poc-env/
 .tmp*
 data/*
+.env
