@@ -2,8 +2,6 @@ from pathlib import Path
 
 from dagster import (
     Definitions,
-    ScheduleDefinition,
-    define_asset_job,
     link_code_references_to_git,
     load_assets_from_package_module,
     with_source_code_references,
@@ -12,6 +10,7 @@ from dagster._core.definitions.metadata.source_code import AnchorBasedFilePathMa
 
 from . import assets
 from .assets import fivetran
+from .assets import dbt
 from . import resources
 
 
@@ -33,5 +32,9 @@ my_assets = link_code_references_to_git(
 
 defs = Definitions(
     assets=my_assets,
-    resources={"redshift": resources.redshift, "fivetran": fivetran.fivetran_workspace}
+    resources={
+        "redshift": resources.redshift,
+        "fivetran": fivetran.fivetran_workspace,
+        "dbt": dbt.dbt_resource,
+    }
 )
