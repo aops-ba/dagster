@@ -11,6 +11,7 @@ setup(
         "matplotlib",
         "dagster-aws",
         "dagster-postgres",
+        "dagster-airbyte"
     ],
     extras_require={"dev": ["dagster-webserver", "pytest"]},
 )

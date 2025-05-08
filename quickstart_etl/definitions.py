@@ -11,12 +11,12 @@ from dagster import (
 from dagster._core.definitions.metadata.source_code import AnchorBasedFilePathMapping
 
 from . import assets
+from .assets import airbyte
 from . import resources
 
 daily_refresh_schedule = ScheduleDefinition(
     job=define_asset_job(name="all_assets_job"), cron_schedule="0 0 * * *"
 )
-
 
 my_assets = with_source_code_references(
     [
@@ -36,6 +36,11 @@ my_assets = link_code_references_to_git(
 
 defs = Definitions(
     assets=my_assets,
-    resources={"redshift": resources.redshift},
-    schedules=[daily_refresh_schedule],
+    resources={
+        "redshift": resources.redshift,
+        "airbyte": resources.airbyte
+    },
+    # schedules=[daily_refresh_schedule],
+    # jobs=[airbyte.sync_platform_users_job],
+    jobs=[airbyte.get_airbyte_token_job]
 )
